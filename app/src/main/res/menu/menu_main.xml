@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_appointments"
+        android:icon="@drawable/ic_baseline_book_online_24"
+        android:title="@string/appointments" />
+
+    <item
+        android:id="@+id/menu_medicine"
+        android:icon="@drawable/ic_baseline_medical_services_24"
+        android:title="@string/medicine" />
+
+    <item
+        android:id="@+id/menu_records"
+        android:icon="@drawable/ic_baseline_insert_invitation_24"
+        android:title="@string/records" />
+
+    <item
+        android:id="@+id/menu_conditions"
+        android:icon="@drawable/ic_baseline_description_24"
+        android:title="@string/conditions" />
+
+    <item
+        android:id="@+id/menu_more"
+        android:icon="@drawable/ic_baseline_more_horiz_24"
+        android:title="@string/more" />
+</menu>
