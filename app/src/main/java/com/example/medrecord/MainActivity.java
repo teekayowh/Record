@@ -57,3 +57,5 @@ public class MainActivity extends AppCompatActivity {
 //TODO: edit fontstyle and fontsize in etUserid and etPassword?
 //TODO: how to include different databases? Currently app only allow 1 user
 //TODO: include the app loading page (w logo)
+//TODO: currently having upload option which will branch out into page with all the records and respective descriptions
+//TODO: change into format where recyclerview exists with upload option as a button at btmright corner

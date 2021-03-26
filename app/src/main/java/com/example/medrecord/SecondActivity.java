@@ -36,7 +36,8 @@ public class SecondActivity extends AppCompatActivity {
     }
 
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    @SuppressLint("NonConstantResourceId")
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = (item) -> {
             switch (item.getItemId()) {
                 case R.id.menu_appointments:
@@ -61,13 +62,11 @@ public class SecondActivity extends AppCompatActivity {
                     return true;
         }
         return false;
-
-
     };
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment);
+        transaction.replace(R.id.loFrameLayout, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }

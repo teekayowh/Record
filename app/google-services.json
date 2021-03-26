@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "403087279853",
+    "project_id": "medrecordupload",
+    "storage_bucket": "medrecordupload.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403087279853:android:16db05382be02001adeee4",
+        "android_client_info": {
+          "package_name": "com.example.medrecord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403087279853-q33orpiijlaihhb24b4ctksnrscvv8ho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjUH0WQWE05Z3y1kR3Z184dE6akjwsBXc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403087279853-q33orpiijlaihhb24b4ctksnrscvv8ho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
