@@ -132,11 +132,17 @@ public class RecordsFragment extends Fragment {
                     {
                         throw task.getException();
                     }
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mProgressBar.setProgress(0);
+                        }
+                    }, 500);
+                    Toast.makeText(thiscontext, "Upload successful", Toast.LENGTH_LONG).show();
                     return mStorageRef.getDownloadUrl();
                 }
-            })
-
-                    .addOnCompleteListener(new OnCompleteListener<Uri>()
+            }).addOnCompleteListener(new OnCompleteListener<Uri>()
             {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task)
@@ -157,6 +163,22 @@ public class RecordsFragment extends Fragment {
                     }
                 }
             });
+            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                    + "." + getFileExtension(mImageUri));
+            mUploadTask = fileReference.putFile(mImageUri)
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(thiscontext, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            mProgressBar.setProgress((int) progress);
+                        }
+                    });
         }
     }
 
