@@ -123,46 +123,6 @@ public class RecordsFragment extends Fragment {
     private void uploadFile() {
         if (mImageUri != null)
         {
-            mStorageRef.putFile(mImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>()
-            {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception
-                {
-                    if (!task.isSuccessful())
-                    {
-                        throw task.getException();
-                    }
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mProgressBar.setProgress(0);
-                        }
-                    }, 500);
-                    Toast.makeText(thiscontext, "Upload successful", Toast.LENGTH_LONG).show();
-                    return mStorageRef.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>()
-            {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task)
-                {
-                    if (task.isSuccessful())
-                    {
-                        Uri downloadUri = task.getResult();
-                        Log.e("logt", "then: " + downloadUri.toString());
-
-
-                        Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
-                                downloadUri.toString());
-
-                        mDatabaseRef.push().setValue(upload);
-                    } else
-                    {
-                        Toast.makeText(thiscontext, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
             StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
             mUploadTask = fileReference.putFile(mImageUri)
@@ -177,6 +137,64 @@ public class RecordsFragment extends Fragment {
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
                             mProgressBar.setProgress((int) progress);
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            if (taskSnapshot.getMetadata() != null) {
+                                if (taskSnapshot.getMetadata().getReference() != null) {
+                                    Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                                    result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            String imageUrl = uri.toString();
+
+                                            mStorageRef.putFile(mImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>()
+                                            {
+                                                @Override
+                                                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception
+                                                {
+                                                    if (!task.isSuccessful())
+                                                    {
+                                                        throw task.getException();
+                                                    }
+                                                    Handler handler = new Handler();
+                                                    handler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            mProgressBar.setProgress(0);
+                                                        }
+                                                    }, 500);
+                                                    Toast.makeText(thiscontext, "Upload successful", Toast.LENGTH_LONG).show();
+                                                    return mStorageRef.getDownloadUrl();
+                                                }
+                                            }).addOnCompleteListener(new OnCompleteListener<Uri>()
+                                            {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Uri> task)
+                                                {
+                                                    if (task.isSuccessful())
+                                                    {
+                                                        Uri downloadUri = task.getResult();
+                                                        Log.e("logt", "then: " + downloadUri.toString());
+
+
+                                                        Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
+                                                                imageUrl);
+
+                                                        mDatabaseRef.push().setValue(upload);
+                                                    } else
+                                                    {
+                                                        Toast.makeText(thiscontext, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+
+                                            System.out.println("PICTURE UPLOADED YAY : " + imageUrl);
+                                        }
+                                    });
+                                }
+                            }
                         }
                     });
         }
