@@ -17,6 +17,9 @@
             android:label="@string/title_activity_images"
             android:theme="@style/Theme.MedRecord.NoActionBar" />
         <activity
+            android:name=".MakeAppointment"
+            android:label="MakeAppointment" />
+        <activity
             android:name=".SecondActivity"
             android:label="@string/title_activity_second" />
         <activity
