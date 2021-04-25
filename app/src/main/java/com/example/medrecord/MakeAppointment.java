@@ -24,15 +24,11 @@ import java.util.List;
 public class MakeAppointment extends AppCompatActivity implements View.OnClickListener {
 
     private int notificationId = 1;
-    private List<AppointmentNotes> mAppointments;
-    private AppointmentAdapter mAppointmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.make_appointment);
-        mAppointments = new ArrayList<>();
-        mAppointmentAdapter = new AppointmentAdapter(MakeAppointment.this, mAppointments);
 
         // Set onClick Listener
         findViewById(R.id.setBtn).setOnClickListener(this);

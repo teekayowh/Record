@@ -42,7 +42,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         viewHolder.nEventName.setText(Eventname);
         viewHolder.nEventtime.setText(Eventtime);
         viewHolder.nEventlocation.setText(Eventlocation);
-        viewHolder.nEventnotes.setText(Eventlocation);
+        viewHolder.nEventnotes.setText(Eventnotes);
         viewHolder.nID.setText(String.valueOf(notes.get(i).getId()));
 
     }

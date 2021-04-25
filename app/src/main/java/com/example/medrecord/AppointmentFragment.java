@@ -11,7 +11,11 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AppointmentFragment extends Fragment {
 
@@ -22,7 +26,8 @@ public class AppointmentFragment extends Fragment {
     private Button mButtonMakeAppointment;
     private Context thiscontext;
     private RecyclerView recyclerView;
-    private Adapter adapter;
+    private List<AppointmentNotes> mAppointments;
+    private AppointmentAdapter mAppointmentAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,6 +36,13 @@ public class AppointmentFragment extends Fragment {
         mButtonMakeAppointment = (Button) v.findViewById(R.id.MakeAppointments);
         thiscontext = container.getContext();
         recyclerView = (RecyclerView) v.findViewById(R.id.AppointmentList);
+        mAppointments = new ArrayList<>();
+        mAppointmentAdapter = new AppointmentAdapter(thiscontext, mAppointments);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(thiscontext));
+        mAppointmentAdapter = new AppointmentAdapter(thiscontext, mAppointments);
+        recyclerView.setAdapter(mAppointmentAdapter);
+
 
         mButtonMakeAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,4 +69,9 @@ public class AppointmentFragment extends Fragment {
 //TODO: For inserting info into recyclerview change id in custom_list_view to nTitle, nTime, etc, part 3 22:31, STATUS: DONE
 //TODO: change apptfrag according to recyclerview 32:03
 //TODO: CLEAN UP ERRORS IN APPTADAPTER AND DATABASE, STATUS: DONE
+
+//TODO: How do i show my appointments in the recyclerview
+//TODO: Change time in makeappointment layout to time of appt and indicate time picker widget is time of notification
+
+
 
