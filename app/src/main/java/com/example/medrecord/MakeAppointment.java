@@ -17,16 +17,22 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MakeAppointment extends AppCompatActivity implements View.OnClickListener {
 
     private int notificationId = 1;
+    private List<AppointmentNotes> mAppointments;
+    private AppointmentAdapter mAppointmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.make_appointment);
+        mAppointments = new ArrayList<>();
+        mAppointmentAdapter = new AppointmentAdapter(MakeAppointment.this, mAppointments);
 
         // Set onClick Listener
         findViewById(R.id.setBtn).setOnClickListener(this);
