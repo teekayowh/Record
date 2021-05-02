@@ -1,4 +1,4 @@
-package com.example.medrecord;
+package com.example.medrecord.appointment;
 
 public class AppointmentNotes {
     private long id;
@@ -7,14 +7,14 @@ public class AppointmentNotes {
     private String eventnotes;
     private String eventtime;
 
-    AppointmentNotes(String eventname, String eventlocation, String eventnotes, String eventtime){
+    AppointmentNotes(String eventname, String eventtime, String eventlocation, String eventnotes){
         this.eventname = eventname;
         this.eventlocation = eventlocation;
         this.eventnotes = eventnotes;
         this.eventtime = eventtime;
     }
 
-    AppointmentNotes(long id, String eventname, String eventlocation, String eventnotes, String eventtime){
+    AppointmentNotes(long id, String eventname, String eventtime, String eventlocation, String eventnotes){
         this.id = id;
         this.eventname = eventname;
         this.eventlocation = eventlocation;
@@ -53,7 +53,7 @@ public class AppointmentNotes {
         return eventlocation;
     }
 
-    public void setEventlocation(String eventnotes) { this.eventlocation = eventlocation; }
+    public void setEventlocation(String eventlocation) { this.eventlocation = eventlocation; }
 
     public String getEventnotes() {
         return eventnotes;

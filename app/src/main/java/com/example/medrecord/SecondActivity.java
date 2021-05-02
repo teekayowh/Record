@@ -3,19 +3,16 @@ package com.example.medrecord;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import com.example.medrecord.appointment.AppointmentFragment;
+import com.example.medrecord.conditions.ConditionsFragment;
+import com.example.medrecord.medicine.MedicineFragment;
+import com.example.medrecord.records.RecordsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.view.View;
-
-import java.util.concurrent.locks.Condition;
 
 public class SecondActivity extends AppCompatActivity {
 

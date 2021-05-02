@@ -1,4 +1,4 @@
-package com.example.medrecord;
+package com.example.medrecord.appointment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.medrecord.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +37,9 @@ public class AppointmentFragment extends Fragment {
         thiscontext = container.getContext();
         recyclerView = (RecyclerView) v.findViewById(R.id.AppointmentList);
         mAppointments = new ArrayList<>();
-        mAppointmentAdapter = new AppointmentAdapter(thiscontext, mAppointments);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(thiscontext));
-        mAppointmentAdapter = new AppointmentAdapter(thiscontext, mAppointments);
+        mAppointmentAdapter = new AppointmentAdapter(thiscontext, new AppointmentDatabase(thiscontext).getAllNotes());
         recyclerView.setAdapter(mAppointmentAdapter);
 
 

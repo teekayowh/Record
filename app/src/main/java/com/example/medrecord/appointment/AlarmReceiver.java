@@ -1,4 +1,4 @@
-package com.example.medrecord;
+package com.example.medrecord.appointment;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
@@ -29,6 +30,19 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Call MainActivity when notification is tapped.
         Intent mainIntent = new Intent(context, MakeAppointment.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, mainIntent, 0);
+
+        Intent delIntent = new Intent(context, MakeAppointment.class);
+        delIntent.putExtra("ID", notificationId > 0);
+        if (notificationId > 0) {
+            AppointmentDatabase sDB = new AppointmentDatabase(context);
+            sDB.deleteNote(notificationId);
+            Toast.makeText(context.getApplicationContext(), "Note Deleted", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(context.getApplicationContext(), "Note deletion unsuccessful", Toast.LENGTH_SHORT).show();
+        }
+        //
+
 
         // NotificationManager
         NotificationManager notificationManager =

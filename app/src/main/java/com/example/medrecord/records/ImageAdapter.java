@@ -1,4 +1,4 @@
-package com.example.medrecord;
+package com.example.medrecord.records;
 
 import android.content.Context;
 
@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.medrecord.R;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 

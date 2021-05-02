@@ -13,13 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedRecord" >
         <receiver
-            android:name = ".AlarmReceiver" />
+            android:name = ".appointment.AlarmReceiver" />
         <activity
-            android:name=".ImagesActivity"
+            android:name=".records.ImagesActivity"
             android:label="@string/title_activity_images"
             android:theme="@style/Theme.MedRecord.NoActionBar" />
         <activity
-            android:name=".MakeAppointment"
+            android:name=".appointment.MakeAppointment"
             android:label="MakeAppointment" />
         <activity
             android:name=".SecondActivity"

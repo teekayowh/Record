@@ -41,40 +41,38 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Event Time: 033121"
+                android:text="Event Time"
                 android:textStyle="italic"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvEventName" />
 
-            <TextView
-                android:id="@+id/tvEventLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Event Location: Sengkang General Hospital"
-                android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/tvEventTime"
-                app:layout_constraintTop_toBottomOf="@+id/tvEventName" />
+    <TextView
+        android:id="@+id/tvEventLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Event Location"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toEndOf="@+id/tvEventTime"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventName" />
 
     <TextView
         android:id="@+id/tvEventNotes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Event Notes: Remember to tell your son"
+        android:text="Event Notes"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEventTime" />
+        app:layout_constraintStart_toEndOf="@+id/tvEventLocation"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventName" />
 
-            <TextView
+    <TextView
                 android:id="@+id/listId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

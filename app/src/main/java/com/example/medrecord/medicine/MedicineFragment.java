@@ -1,4 +1,4 @@
-package com.example.medrecord;
+package com.example.medrecord.medicine;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.medrecord.R;
 
 public class MedicineFragment extends Fragment {
 

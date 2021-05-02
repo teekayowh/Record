@@ -1,25 +1,19 @@
-package com.example.medrecord;
+package com.example.medrecord.appointment;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.medrecord.R;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class MakeAppointment extends AppCompatActivity implements View.OnClickListener {
 
@@ -86,11 +80,10 @@ public class MakeAppointment extends AppCompatActivity implements View.OnClickLi
                 break;
         }
 
-        AppointmentNotes note = new AppointmentNotes(eventname.getText().toString(),eventlocation.getText().toString(),
-                eventtime.getText().toString(), eventnotes.getText().toString());
+        AppointmentNotes note = new AppointmentNotes(eventname.getText().toString(),eventtime.getText().toString(),
+                eventlocation.getText().toString(), eventnotes.getText().toString());
         AppointmentDatabase sDB = new AppointmentDatabase(this);
-        long id = sDB.addNote(note);
-        AppointmentNotes check = sDB.getNote(id);
+        sDB.addNote(note);
         Toast.makeText(this, "Note Saved.", Toast.LENGTH_SHORT).show();
     }
 }

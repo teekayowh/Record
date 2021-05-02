@@ -1,4 +1,4 @@
-package com.example.medrecord;
+package com.example.medrecord.records;
 
 import com.google.firebase.database.Exclude;
 
