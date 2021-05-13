@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
+import com.example.medrecord.MainActivity;
+
 public class AlarmReceiver extends BroadcastReceiver {
 
     private static final String CHANNEL_ID = "CHANNEL_SAMPLE";
@@ -20,6 +22,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         // Get id & message
         int notificationId = intent.getIntExtra("notificationId", 0);
+        long id = intent.getLongExtra("id", 0);
         String name = intent.getStringExtra("message");
         String time = intent.getStringExtra("time");
         String location = intent.getStringExtra("location");
@@ -28,19 +31,24 @@ public class AlarmReceiver extends BroadcastReceiver {
                 location + ". Do take note that " + notes;
 
         // Call MainActivity when notification is tapped.
-        Intent mainIntent = new Intent(context, MakeAppointment.class);
+        Intent mainIntent = new Intent(context, AppointmentFragment.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, mainIntent, 0);
 
-        Intent delIntent = new Intent(context, MakeAppointment.class);
-        delIntent.putExtra("ID", notificationId > 0);
-        if (notificationId > 0) {
-            AppointmentDatabase sDB = new AppointmentDatabase(context);
-            sDB.deleteNote(notificationId);
-            Toast.makeText(context.getApplicationContext(), "Note Deleted", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Toast.makeText(context.getApplicationContext(), "Note deletion unsuccessful", Toast.LENGTH_SHORT).show();
-        }
+        // Delete note upon receiving alarm
+        AppointmentDatabase sDB = new AppointmentDatabase(context);
+        sDB.deleteNote(id);
+
+
+//        Intent delIntent = new Intent(context, MakeAppointment.class);
+//        delIntent.putExtra("ID", notificationId > 0);
+//        if (notificationId > 0) {
+//            AppointmentDatabase sDB = new AppointmentDatabase(context);
+//            sDB.deleteNote(notificationId);
+//            Toast.makeText(context.getApplicationContext(), "Note Deleted", Toast.LENGTH_SHORT).show();
+//        }
+//        else {
+//            Toast.makeText(context.getApplicationContext(), "Note deletion unsuccessful", Toast.LENGTH_SHORT).show();
+//        }
         //
 
 
