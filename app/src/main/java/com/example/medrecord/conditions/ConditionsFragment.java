@@ -42,6 +42,7 @@ public class ConditionsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_conditions, container, false);
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        thiscontext = container.getContext();
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         noItemText = (TextView) v.findViewById(R.id.noItemText);
         conditionsDatabase = new ConditionDatabase(thiscontext);
