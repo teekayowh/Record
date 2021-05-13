@@ -47,6 +47,19 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         viewHolder.nEventnotes.setText(Eventnotes);
         viewHolder.nID.setText(String.valueOf(notes.get(i).getId()));
 
+        // Delete appt onhold - just to test that deleting works
+        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                AppointmentDatabase sDB = new AppointmentDatabase(view.getContext());
+                sDB.deleteNote(id);
+                notes.remove(i);
+                notifyItemRemoved(i);
+
+                return false;
+            }
+        });
+
     }
 
     @Override

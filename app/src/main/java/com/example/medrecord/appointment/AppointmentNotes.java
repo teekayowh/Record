@@ -7,12 +7,13 @@ public class AppointmentNotes {
     private String eventnotes;
     private String eventtime;
 
-    AppointmentNotes(String eventname, String eventtime, String eventlocation, String eventnotes){
-        this.eventname = eventname;
-        this.eventlocation = eventlocation;
-        this.eventnotes = eventnotes;
-        this.eventtime = eventtime;
-    }
+//    AppointmentNotes(int id, String eventname, String eventtime, String eventlocation, String eventnotes){
+//        this.id = id;
+//        this.eventname = eventname;
+//        this.eventlocation = eventlocation;
+//        this.eventnotes = eventnotes;
+//        this.eventtime = eventtime;
+//    }
 
     AppointmentNotes(long id, String eventname, String eventtime, String eventlocation, String eventnotes){
         this.id = id;

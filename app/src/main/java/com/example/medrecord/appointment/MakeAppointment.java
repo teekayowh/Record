@@ -12,6 +12,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.medrecord.R;
+import com.example.medrecord.conditions.ConditionDatabase;
 
 import java.util.Calendar;
 
@@ -36,11 +37,13 @@ public class MakeAppointment extends AppCompatActivity implements View.OnClickLi
         EditText eventtime = findViewById(R.id.etEventTime);
         EditText eventlocation = findViewById(R.id.etEventLocation);
         EditText eventnotes = findViewById(R.id.etEventNotes);
+        long uniqueId = (new AppointmentDatabase(getApplicationContext())).getNewId();
         TimePicker timePicker = findViewById(R.id.timePicker);
 
         // Intent
         Intent intent = new Intent(MakeAppointment.this, AlarmReceiver.class);
         intent.putExtra("notificationId", notificationId);
+        intent.putExtra("id", uniqueId);
         intent.putExtra("message", eventname.getText().toString());
         intent.putExtra("time", eventtime.getText().toString());
         intent.putExtra("location", eventlocation.getText().toString());
@@ -71,6 +74,15 @@ public class MakeAppointment extends AppCompatActivity implements View.OnClickLi
 
                 Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
 
+                AppointmentNotes note = new AppointmentNotes(uniqueId, eventname.getText().toString(),eventtime.getText().toString(),
+                        eventlocation.getText().toString(), eventnotes.getText().toString());
+                AppointmentDatabase sDB = new AppointmentDatabase(this);
+                sDB.addNote(note);
+                Toast.makeText(this, "Note Saved.", Toast.LENGTH_SHORT).show();
+
+                //nav back to main appointment fragment
+                onBackPressed();
+//                startActivity(new Intent(getApplicationContext(), AppointmentFragment.class));
 
                 break;
 
@@ -79,11 +91,5 @@ public class MakeAppointment extends AppCompatActivity implements View.OnClickLi
                 Toast.makeText(this, "Canceled.", Toast.LENGTH_SHORT).show();
                 break;
         }
-
-        AppointmentNotes note = new AppointmentNotes(eventname.getText().toString(),eventtime.getText().toString(),
-                eventlocation.getText().toString(), eventnotes.getText().toString());
-        AppointmentDatabase sDB = new AppointmentDatabase(this);
-        sDB.addNote(note);
-        Toast.makeText(this, "Note Saved.", Toast.LENGTH_SHORT).show();
     }
 }

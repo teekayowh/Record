@@ -3,11 +3,13 @@ package com.example.medrecord.appointment;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class AppointmentDatabase extends SQLiteOpenHelper {
     // declare require values
@@ -56,6 +58,7 @@ public class AppointmentDatabase extends SQLiteOpenHelper {
     public long addNote(AppointmentNotes note){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues v = new ContentValues();
+        v.put(KEY_ID, note.getId());
         v.put(KEY_NAME,note.getEventname());
         v.put(KEY_TIME,note.getEventtime());
         v.put(KEY_LOCATION,note.getEventlocation());
@@ -63,6 +66,7 @@ public class AppointmentDatabase extends SQLiteOpenHelper {
 
         // inserting data into db
         long ID = db.insert(TABLE_NAME,null,v);
+
         return  ID;
     }
 
@@ -106,5 +110,25 @@ public class AppointmentDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME,KEY_ID+"=?",new String[]{String.valueOf(id)});
         db.close();
+    }
+
+    public long getNewId() {
+        String queryLastRowInserted = "SELECT  * FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        final Cursor cursor = db.rawQuery(queryLastRowInserted, null);
+        int _idLastInsertedRow = 0;
+        if (cursor != null) {
+            try {
+                if (cursor.moveToLast()) {
+                    _idLastInsertedRow = cursor.getInt(0);
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+
+        return _idLastInsertedRow + 1;
+
     }
 }

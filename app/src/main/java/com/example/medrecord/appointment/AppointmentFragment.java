@@ -53,6 +53,13 @@ public class AppointmentFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume() {
+        mAppointmentAdapter = new AppointmentAdapter(thiscontext, new AppointmentDatabase(thiscontext).getAllNotes());
+        recyclerView.setAdapter(mAppointmentAdapter);
+        super.onResume();
+    }
+
     private void openMakeAppointment() {
         Intent intent = new Intent(thiscontext, MakeAppointment.class);
         startActivity(intent);
