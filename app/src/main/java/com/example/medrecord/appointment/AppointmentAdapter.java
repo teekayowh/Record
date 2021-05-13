@@ -64,15 +64,6 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             nEventtime   = itemView.findViewById(R.id.tvEventTime);
             nEventnotes   = itemView.findViewById(R.id.tvEventNotes);
             nID     = itemView.findViewById(R.id.listId);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(v.getContext(), AlarmReceiver.class);
-                    i.putExtra("ID",notes.get(getAdapterPosition()).getId());
-                    v.getContext().startActivity(i);
-                }
-            });
         }
     }
 }

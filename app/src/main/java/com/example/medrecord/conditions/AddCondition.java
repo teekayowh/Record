@@ -27,7 +27,7 @@ public class AddCondition extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_condition;
+        setContentView(R.layout.activity_add_condition);
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
@@ -88,7 +88,7 @@ public class AddCondition extends AppCompatActivity {
                 ConditionDatabase sDB = new ConditionDatabase(this);
                 long id = sDB.addCondition(note);
                 ConditionNote check = sDB.getCondition(id);
-                Log.d("inserted", "Note: "+ id + " -> Title:" + check.getTitle()+" Date: "+ check.getDate());
+                Log.d("inserted", "Note: "+ id + " -> Title:" + check.getConditionTitle()+" Date: "+ check.getConditionDate());
                 onBackPressed();
 
                 Toast.makeText(this, "Note Saved.", Toast.LENGTH_SHORT).show();

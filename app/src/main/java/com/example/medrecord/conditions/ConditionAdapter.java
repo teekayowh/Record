@@ -34,16 +34,16 @@ public class ConditionAdapter extends RecyclerView.Adapter<ConditionAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        String  title    = conditionNotes.get(i).getTitle();
-        String  date     = conditionNotes.get(i).getDate();
-        String  time     = conditionNotes.get(i).getTime();
-        long    id       = conditionNotes.get(i).getId();
+        String  title    = conditionNotes.get(i).getConditionTitle();
+        String  date     = conditionNotes.get(i).getConditionDate();
+        String  time     = conditionNotes.get(i).getConditionTime();
+        long    id       = conditionNotes.get(i).getConditionId();
         Log.d("date on ", "Date on: "+date);
 
         viewHolder.nTitle.setText(title);
         viewHolder.nDate.setText(date);
         viewHolder.nTime.setText(time);
-        viewHolder.nID.setText(String.valueOf(conditionNotes.get(i).getId()));
+        viewHolder.nID.setText(String.valueOf(conditionNotes.get(i).getConditionId()));
 
     }
 
@@ -66,7 +66,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<ConditionAdapter.View
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(v.getContext(),ConditionDetail.class);
-                    i.putExtra("ID",conditionNotes.get(getAdapterPosition()).getId());
+                    i.putExtra("ID",conditionNotes.get(getAdapterPosition()).getConditionId());
                     v.getContext().startActivity(i);
                 }
             });

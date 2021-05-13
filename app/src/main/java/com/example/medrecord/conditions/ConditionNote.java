@@ -25,43 +25,42 @@ public class ConditionNote {
         // empty constructor
     }
 
-    public long getId() {
+    public long getConditionId() {
         return Conditionid;
     }
 
-    public void setId(long conditionid) {
+    public void setConditionId(long conditionid) {
         this.Conditionid = Conditionid;
     }
 
-    public String getTitle() {
+    public String getConditionTitle() {
         return Conditiontitle;
     }
 
-    public void setTitle(String conditiontitle) {
+    public void setConditionTitle(String conditiontitle) {
         this.Conditiontitle = Conditiontitle;
     }
 
-    public String getContent() {
+    public String getConditionContent() {
         return Conditioncontent;
     }
 
-    public void setContent(String conditioncontent) {
-        this.Conditioncontent = Conditioncontent;
+    public void setConditionContent(String conditioncontent) { this.Conditioncontent = Conditioncontent;
     }
 
-    public String getDate() {
+    public String getConditionDate() {
         return Conditiondate;
     }
 
-    public void setDate(String conditiondate) {
+    public void setConditionDate(String conditiondate) {
         this.Conditiondate = Conditiondate;
     }
 
-    public String getTime() {
+    public String getConditionTime() {
         return Conditiontime;
     }
 
-    public void setTime(String conditiontime) {
+    public void setConditionTime(String conditiontime) {
         this.Conditiontime = Conditiontime;
     }
 }

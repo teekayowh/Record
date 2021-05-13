@@ -13,19 +13,19 @@ import java.util.List;
 public class ConditionDatabase extends SQLiteOpenHelper {
     // declare require values
     private static final int DATABASE_VERSION = 2;
-    private static final String DATABASE_NAME = "SimpleDB";
-    private static final String TABLE_NAME = "SimpleTable";
+    private static final String DATABASE_NAME = "SimpleConditionDB";
+    private static final String TABLE_NAME = "SimpleConditionTable";
 
     public ConditionDatabase(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }
 
     // declare table column names
-    private static final String KEY_ID = "id";
-    private static final String KEY_TITLE = "title";
-    private static final String KEY_CONTENT = "content";
-    private static final String KEY_DATE = "date";
-    private static final String KEY_TIME = "time";
+    private static final String KEY_CONDITION_ID = "conditionid";
+    private static final String KEY_CONDITION_TITLE = "conditiontitle";
+    private static final String KEY_CONDITION_CONTENT = "conditioncontent";
+    private static final String KEY_CONDITION_DATE = "conditiondate";
+    private static final String KEY_CONDITION_TIME = "conditiontime";
 
 
 
@@ -33,70 +33,70 @@ public class ConditionDatabase extends SQLiteOpenHelper {
 
     // creating tables
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        String createDb = "CREATE TABLE "+TABLE_NAME+" ("+
-                KEY_ID+" INTEGER PRIMARY KEY,"+
-                KEY_TITLE+" TEXT,"+
-                KEY_CONTENT+" TEXT,"+
-                KEY_DATE+" TEXT,"+
-                KEY_TIME+" TEXT"
+    public void onCreate(SQLiteDatabase conditiondb) {
+        String createconditionDb = "CREATE TABLE "+TABLE_NAME+" ("+
+                KEY_CONDITION_ID+" INTEGER PRIMARY KEY,"+
+                KEY_CONDITION_TITLE+" TEXT,"+
+                KEY_CONDITION_CONTENT+" TEXT,"+
+                KEY_CONDITION_DATE+" TEXT,"+
+                KEY_CONDITION_TIME+" TEXT"
                 +" )";
-        db.execSQL(createDb);
+        conditiondb.execSQL(createconditionDb);
     }
 
     // upgrade db if older version exists
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase conditiondb, int oldVersion, int newVersion) {
         if(oldVersion >= newVersion)
             return;
 
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
-        onCreate(db);
+        conditiondb.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
+        onCreate(conditiondb);
     }
 
     public long addCondition(ConditionNote conditionNote){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues v = new ContentValues();
-        v.put(KEY_TITLE,conditionNote.getTitle());
-        v.put(KEY_CONTENT,conditionNote.getContent());
-        v.put(KEY_DATE,conditionNote.getDate());
-        v.put(KEY_TIME,conditionNote.getTime());
+        SQLiteDatabase conditiondb = this.getWritableDatabase();
+        ContentValues conditionv = new ContentValues();
+        conditionv.put(KEY_CONDITION_TITLE,conditionNote.getConditionTitle());
+        conditionv.put(KEY_CONDITION_CONTENT,conditionNote.getConditionContent());
+        conditionv.put(KEY_CONDITION_DATE,conditionNote.getConditionDate());
+        conditionv.put(KEY_CONDITION_TIME,conditionNote.getConditionTime());
 
         // inserting data into db
-        long ID = db.insert(TABLE_NAME,null,v);
+        long ID = conditiondb.insert(TABLE_NAME,null,conditionv);
         return  ID;
     }
 
     public ConditionNote getCondition(long id){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String[] query = new String[] {KEY_ID,KEY_TITLE,KEY_CONTENT,KEY_DATE,KEY_TIME};
-        Cursor cursor=  db.query(TABLE_NAME,query,KEY_ID+"=?",new String[]{String.valueOf(id)},null,null,null,null);
-        if(cursor != null)
-            cursor.moveToFirst();
+        SQLiteDatabase conditiondb = this.getWritableDatabase();
+        String[] conditionquery = new String[] {KEY_CONDITION_ID,KEY_CONDITION_TITLE,KEY_CONDITION_CONTENT,KEY_CONDITION_DATE,KEY_CONDITION_TIME};
+        Cursor conditioncursor=  conditiondb.query(TABLE_NAME,conditionquery,KEY_CONDITION_ID+"=?",new String[]{String.valueOf(id)},null,null,null,null);
+        if(conditioncursor != null)
+            conditioncursor.moveToFirst();
 
         return new ConditionNote(
-                Long.parseLong(cursor.getString(0)),
-                cursor.getString(1),
-                cursor.getString(2),
-                cursor.getString(3),
-                cursor.getString(4));
+                Long.parseLong(conditioncursor.getString(0)),
+                conditioncursor.getString(1),
+                conditioncursor.getString(2),
+                conditioncursor.getString(3),
+                conditioncursor.getString(4));
     }
 
     public List<ConditionNote> getAllCondition(){
         List<ConditionNote> allCondition = new ArrayList<>();
-        String query = "SELECT * FROM " + TABLE_NAME+" ORDER BY "+KEY_ID+" DESC";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query,null);
-        if(cursor.moveToFirst()){
+        String conditionquery = "SELECT * FROM " + TABLE_NAME+" ORDER BY "+KEY_CONDITION_ID+" DESC";
+        SQLiteDatabase conditiondb = this.getReadableDatabase();
+        Cursor conditioncursor = conditiondb.rawQuery(conditionquery,null);
+        if(conditioncursor.moveToFirst()){
             do{
-                ConditionNote note = new ConditionNote();
-                note.setId(Long.parseLong(cursor.getString(0)));
-                note.setTitle(cursor.getString(1));
-                note.setContent(cursor.getString(2));
-                note.setDate(cursor.getString(3));
-                note.setTime(cursor.getString(4));
-                allCondition.add(note);
-            }while (cursor.moveToNext());
+                ConditionNote conditionnote = new ConditionNote();
+                conditionnote.setConditionId(Long.parseLong(conditioncursor.getString(0)));
+                conditionnote.setConditionTitle(conditioncursor.getString(1));
+                conditionnote.setConditionContent(conditioncursor.getString(2));
+                conditionnote.setConditionDate(conditioncursor.getString(3));
+                conditionnote.setConditionTime(conditioncursor.getString(4));
+                allCondition.add(conditionnote);
+            }while (conditioncursor.moveToNext());
         }
 
         return allCondition;
@@ -104,21 +104,21 @@ public class ConditionDatabase extends SQLiteOpenHelper {
     }
 
     public int editCondition(ConditionNote conditionNote){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues c = new ContentValues();
-        Log.d("Edited", "Edited Title: -> "+ conditionNote.getTitle() + "\n ID -> "+conditionNote.getId());
-        c.put(KEY_TITLE,conditionNote.getTitle());
-        c.put(KEY_CONTENT,conditionNote.getContent());
-        c.put(KEY_DATE,conditionNote.getDate());
-        c.put(KEY_TIME,conditionNote.getTime());
-        return db.update(TABLE_NAME,c,KEY_ID+"=?",new String[]{String.valueOf(conditionNote.getId())});
+        SQLiteDatabase conditiondb = this.getWritableDatabase();
+        ContentValues cond = new ContentValues();
+        Log.d("Edited", "Edited Title: -> "+ conditionNote.getConditionTitle() + "\n ID -> "+conditionNote.getConditionId());
+        cond.put(KEY_CONDITION_TITLE,conditionNote.getConditionTitle());
+        cond.put(KEY_CONDITION_CONTENT,conditionNote.getConditionContent());
+        cond.put(KEY_CONDITION_DATE,conditionNote.getConditionDate());
+        cond.put(KEY_CONDITION_TIME,conditionNote.getConditionTime());
+        return conditiondb.update(TABLE_NAME,cond,KEY_CONDITION_ID+"=?",new String[]{String.valueOf(conditionNote.getConditionId())});
     }
 
 
 
     void deleteCondition(long id){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME,KEY_ID+"=?",new String[]{String.valueOf(id)});
+        db.delete(TABLE_NAME,KEY_CONDITION_ID+"=?",new String[]{String.valueOf(id)});
         db.close();
     }
 }

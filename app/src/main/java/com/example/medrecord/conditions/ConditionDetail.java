@@ -32,9 +32,9 @@ public class ConditionDetail extends AppCompatActivity {
         id = i.getLongExtra("ID",0);
         ConditionDatabase db = new ConditionDatabase(this);
         ConditionNote note = db.getCondition(id);
-        getSupportActionBar().setTitle(note.getTitle());
+        getSupportActionBar().setTitle(note.getConditionTitle());
         TextView details = findViewById(R.id.noteDesc);
-        details.setText(note.getContent());
+        details.setText(note.getConditionContent());
         details.setMovementMethod(new ScrollingMovementMethod());
 
         FloatingActionButton fab = findViewById(R.id.fab);

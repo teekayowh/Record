@@ -43,7 +43,6 @@ public class ConditionsFragment extends Fragment {
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         noItemText = (TextView) v.findViewById(R.id.noItemText);
         conditionsDatabase = new ConditionDatabase(thiscontext);
         List<ConditionNote> allCondition = conditionsDatabase.getAllCondition();

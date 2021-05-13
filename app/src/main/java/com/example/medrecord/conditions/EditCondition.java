@@ -30,7 +30,7 @@ public class EditCondition extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
+        setContentView(R.layout.activity_edit_condition);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,8 +41,8 @@ public class EditCondition extends AppCompatActivity {
         ConditionDatabase db = new ConditionDatabase(this);
         ConditionNote note = db.getCondition(nId);
 
-        final String title = note.getTitle();
-        String content = note.getContent();
+        final String title = note.getConditionTitle();
+        String content = note.getConditionContent();
         nTitle = findViewById(R.id.noteTitle);
         nContent = findViewById(R.id.noteDetails);
         nTitle.addTextChangedListener(new TextWatcher() {
@@ -86,7 +86,7 @@ public class EditCondition extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.save_menu,menu);
+        inflater.inflate(R.menu.save_condition_menu,menu);
         return true;
     }
 
@@ -94,7 +94,7 @@ public class EditCondition extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.save){
             ConditionNote note = new ConditionNote(nId,nTitle.getText().toString(),nContent.getText().toString(),todaysDate,currentTime);
-            Log.d("EDITED", "edited: before saving id -> " + note.getId());
+            Log.d("EDITED", "edited: before saving id -> " + note.getConditionId());
             ConditionDatabase sDB = new ConditionDatabase(getApplicationContext());
             long id = sDB.editCondition(note);
             Log.d("EDITED", "EDIT: id " + id);
@@ -108,7 +108,7 @@ public class EditCondition extends AppCompatActivity {
     }
 
     private void goToMain() {
-        Intent i = new Intent(this, ConditionsFragment);
+        Intent i = new Intent(this, ConditionsFragment.class);
         startActivity(i);
     }
 
