@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.medrecord.R;
+import com.example.medrecord.SecondActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ConditionDetail extends AppCompatActivity {
@@ -23,8 +24,8 @@ public class ConditionDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_condition_detail);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar condition_toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(condition_toolbar);
 
 
 
@@ -74,7 +75,7 @@ public class ConditionDetail extends AppCompatActivity {
     }
 
     private void goToMain() {
-        Intent i = new Intent(this, ConditionsFragment.class);
+        Intent i = new Intent(this, SecondActivity.class);
         startActivity(i);
     }
 }

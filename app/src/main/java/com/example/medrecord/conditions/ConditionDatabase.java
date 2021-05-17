@@ -9,6 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ConditionDatabase extends SQLiteOpenHelper {
     // declare require values
@@ -21,11 +22,11 @@ public class ConditionDatabase extends SQLiteOpenHelper {
     }
 
     // declare table column names
-    private static final String KEY_CONDITION_ID = "conditionid";
-    private static final String KEY_CONDITION_TITLE = "conditiontitle";
-    private static final String KEY_CONDITION_CONTENT = "conditioncontent";
-    private static final String KEY_CONDITION_DATE = "conditiondate";
-    private static final String KEY_CONDITION_TIME = "conditiontime";
+    private static final String KEY_CONDITION_ID = "Conditionid";
+    private static final String KEY_CONDITION_TITLE = "Conditiontitle";
+    private static final String KEY_CONDITION_CONTENT = "Conditioncontent";
+    private static final String KEY_CONDITION_DATE = "Conditiondate";
+    private static final String KEY_CONDITION_TIME = "Conditiontime";
 
 
 
@@ -68,18 +69,18 @@ public class ConditionDatabase extends SQLiteOpenHelper {
     }
 
     public ConditionNote getCondition(long id){
-        SQLiteDatabase conditiondb = this.getWritableDatabase();
-        String[] conditionquery = new String[] {KEY_CONDITION_ID,KEY_CONDITION_TITLE,KEY_CONDITION_CONTENT,KEY_CONDITION_DATE,KEY_CONDITION_TIME};
-        Cursor conditioncursor=  conditiondb.query(TABLE_NAME,conditionquery,KEY_CONDITION_ID+"=?",new String[]{String.valueOf(id)},null,null,null,null);
-        if(conditioncursor != null)
-            conditioncursor.moveToFirst();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] query = new String[] {KEY_CONDITION_ID,KEY_CONDITION_TITLE,KEY_CONDITION_CONTENT,KEY_CONDITION_DATE,KEY_CONDITION_TIME};
+        Cursor cursor= db.query(TABLE_NAME,query,KEY_CONDITION_ID+"=?",new String[]{String.valueOf(id)},null,null,null,null);
+        if(cursor != null)
+            cursor.moveToFirst();
 
         return new ConditionNote(
-                Long.parseLong(conditioncursor.getString(0)),
-                conditioncursor.getString(1),
-                conditioncursor.getString(2),
-                conditioncursor.getString(3),
-                conditioncursor.getString(4));
+                Long.parseLong(cursor.getString(0)),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4));
     }
 
     public List<ConditionNote> getAllCondition(){

@@ -70,20 +70,20 @@ public class AppointmentDatabase extends SQLiteOpenHelper {
         return  ID;
     }
 
-    public AppointmentNotes getNote(long id){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String[] query = new String[] {KEY_ID,KEY_NAME,KEY_TIME,KEY_LOCATION,KEY_NOTES};
-        Cursor cursor=  db.query(TABLE_NAME,query,KEY_ID+"=?",new String[]{String.valueOf(id)},null,null,null,null);
-        if(cursor != null)
-            cursor.moveToFirst();
-
-        return new AppointmentNotes(
-                Long.parseLong(cursor.getString(0)),
-                cursor.getString(1),
-                cursor.getString(2),
-                cursor.getString(3),
-                cursor.getString(4));
-    }
+//    public AppointmentNotes getNote(long id){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        String[] query = new String[] {KEY_ID,KEY_NAME,KEY_TIME,KEY_LOCATION,KEY_NOTES};
+//        Cursor cursor=  db.query(TABLE_NAME,query,KEY_ID+"=?",new String[]{String.valueOf(id)},null,null,null,null);
+//        if(cursor != null)
+//            cursor.moveToFirst();
+//
+//        return new AppointmentNotes(
+//                Long.parseLong(cursor.getString(0)),
+//                cursor.getString(1),
+//                cursor.getString(2),
+//                cursor.getString(3),
+//                cursor.getString(4));
+//    }
 
     public List<AppointmentNotes> getAllNotes(){
         List<AppointmentNotes> allNotes = new ArrayList<>();

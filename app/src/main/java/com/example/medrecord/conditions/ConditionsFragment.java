@@ -79,7 +79,7 @@ public class ConditionsFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.add){
             Toast.makeText(thiscontext, "Add New Note", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(thiscontext, AddCondition.class);
+            Intent i = new Intent(getActivity(), AddCondition.class);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);

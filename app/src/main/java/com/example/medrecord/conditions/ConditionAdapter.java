@@ -19,7 +19,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<ConditionAdapter.View
     private LayoutInflater inflater;
     private List<ConditionNote> conditionNotes;
 
-    ConditionAdapter(Context context, List<ConditionNote> conditionnotes){
+    ConditionAdapter(Context context, List<ConditionNote> conditionNotes){
         this.inflater = LayoutInflater.from(context);
         this.conditionNotes = conditionNotes;
     }
@@ -28,7 +28,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<ConditionAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = inflater.inflate(R.layout.custom_list_view,viewGroup,false);
+        View view = inflater.inflate(R.layout.custom_condition_list_view,viewGroup,false);
         return new ViewHolder(view);
     }
 
@@ -60,7 +60,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<ConditionAdapter.View
             nTitle  = itemView.findViewById(R.id.nTitle);
             nDate   = itemView.findViewById(R.id.nDate);
             nTime   = itemView.findViewById(R.id.nTime);
-            nID     = itemView.findViewById(R.id.listId);
+            nID     = itemView.findViewById(R.id.conditionlistId);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

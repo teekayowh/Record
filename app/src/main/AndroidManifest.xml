@@ -22,6 +22,16 @@
             android:name=".appointment.MakeAppointment"
             android:label="MakeAppointment" />
         <activity
+            android:name=".conditions.AddCondition"
+            android:label="AddCondition" />
+        <activity
+            android:name=".conditions.ConditionDetail"
+            android:label="ConditionDetail"
+            android:theme="@style/Theme.MedRecord.NoActionBar"/>
+        <activity
+            android:name=".conditions.EditCondition"
+            android:label="EditCondition" />
+        <activity
             android:name=".SecondActivity"
             android:label="@string/title_activity_second" />
         <activity

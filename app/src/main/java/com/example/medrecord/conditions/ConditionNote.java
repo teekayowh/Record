@@ -29,7 +29,7 @@ public class ConditionNote {
         return Conditionid;
     }
 
-    public void setConditionId(long conditionid) {
+    public void setConditionId(long Conditionid) {
         this.Conditionid = Conditionid;
     }
 
@@ -37,7 +37,7 @@ public class ConditionNote {
         return Conditiontitle;
     }
 
-    public void setConditionTitle(String conditiontitle) {
+    public void setConditionTitle(String Conditiontitle) {
         this.Conditiontitle = Conditiontitle;
     }
 
@@ -45,14 +45,14 @@ public class ConditionNote {
         return Conditioncontent;
     }
 
-    public void setConditionContent(String conditioncontent) { this.Conditioncontent = Conditioncontent;
+    public void setConditionContent(String Conditioncontent) { this.Conditioncontent = Conditioncontent;
     }
 
     public String getConditionDate() {
         return Conditiondate;
     }
 
-    public void setConditionDate(String conditiondate) {
+    public void setConditionDate(String Conditiondate) {
         this.Conditiondate = Conditiondate;
     }
 
@@ -60,7 +60,7 @@ public class ConditionNote {
         return Conditiontime;
     }
 
-    public void setConditionTime(String conditiontime) {
+    public void setConditionTime(String Conditiontime) {
         this.Conditiontime = Conditiontime;
     }
 }
