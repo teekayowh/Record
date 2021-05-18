@@ -1,6 +1,4 @@
-package com.example.medrecord.appointment;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.medrecord.medicine;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -11,18 +9,20 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.medrecord.R;
 
 import java.util.Calendar;
 
-public class MakeAppointment extends AppCompatActivity implements View.OnClickListener {
+public class MakeMedicine extends AppCompatActivity implements View.OnClickListener {
 
     private int notificationId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.make_appointment);
+        setContentView(R.layout.make_medicine);
 
         // Set onClick Listener
         findViewById(R.id.setBtn).setOnClickListener(this);
@@ -32,25 +32,25 @@ public class MakeAppointment extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
 
-        EditText eventname = findViewById(R.id.etEventName);
-        EditText eventtime = findViewById(R.id.etEventTime);
-        EditText eventlocation = findViewById(R.id.etEventLocation);
-        EditText eventnotes = findViewById(R.id.etEventNotes);
-        long uniqueId = (new AppointmentDatabase(getApplicationContext())).getNewId();
-        TimePicker timePicker = findViewById(R.id.timePicker);
+        EditText medicinename = findViewById(R.id.etMedicineName);
+        EditText medicinetime = findViewById(R.id.etMedicineTime);
+        EditText medicinelocation = findViewById(R.id.etMedicineLocation);
+        EditText medicinenotes = findViewById(R.id.etMedicineNotes);
+        long uniqueId = (new MedicineDatabase(getApplicationContext())).getNewId();
+        TimePicker medicinetimePicker = findViewById(R.id.medicinetimePicker);
 
         // Intent
-        Intent intent = new Intent(MakeAppointment.this, AlarmReceiver.class);
+        Intent intent = new Intent(MakeMedicine.this, MedicineAlarmReceiver.class);
         intent.putExtra("notificationId", notificationId);
         intent.putExtra("id", uniqueId);
-        intent.putExtra("message", eventname.getText().toString());
-        intent.putExtra("time", eventtime.getText().toString());
-        intent.putExtra("location", eventlocation.getText().toString());
-        intent.putExtra("notes", eventnotes.getText().toString());
+        intent.putExtra("message", medicinename.getText().toString());
+        intent.putExtra("time", medicinetime.getText().toString());
+        intent.putExtra("location", medicinelocation.getText().toString());
+        intent.putExtra("notes", medicinenotes.getText().toString());
 
         // PendingIntent
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                MakeAppointment.this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT
+                MakeMedicine.this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT
         );
 
         // AlarmManager
@@ -58,8 +58,8 @@ public class MakeAppointment extends AppCompatActivity implements View.OnClickLi
 
         switch (view.getId()) {
             case R.id.setBtn:
-                int hour = timePicker.getCurrentHour();
-                int minute = timePicker.getCurrentMinute();
+                int hour = medicinetimePicker.getCurrentHour();
+                int minute = medicinetimePicker.getCurrentMinute();
 
                 // Create time.
                 Calendar startTime = Calendar.getInstance();
@@ -73,11 +73,11 @@ public class MakeAppointment extends AppCompatActivity implements View.OnClickLi
 
                 Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
 
-                AppointmentNotes note = new AppointmentNotes(uniqueId, eventname.getText().toString(),eventtime.getText().toString(),
-                        eventlocation.getText().toString(), eventnotes.getText().toString());
-                AppointmentDatabase sDB = new AppointmentDatabase(this);
-                sDB.addNote(note);
-                Toast.makeText(this, "Note Saved.", Toast.LENGTH_SHORT).show();
+                MedicineNote Medicinenote = new MedicineNote(uniqueId, medicinename.getText().toString(),medicinetime.getText().toString(),
+                        medicinelocation.getText().toString(), medicinenotes.getText().toString());
+                MedicineDatabase sDB = new MedicineDatabase(this);
+                sDB.addMedicine(Medicinenote);
+                Toast.makeText(this, "Medicine Saved.", Toast.LENGTH_SHORT).show();
 
                 //nav back to main appointment fragment
                 onBackPressed();
@@ -92,3 +92,4 @@ public class MakeAppointment extends AppCompatActivity implements View.OnClickLi
         }
     }
 }
+

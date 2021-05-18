@@ -32,6 +32,9 @@
             android:name=".conditions.EditCondition"
             android:label="EditCondition" />
         <activity
+            android:name=".medicine.MakeMedicine"
+            android:label="MakeMedicine" />
+        <activity
             android:name=".SecondActivity"
             android:label="@string/title_activity_second" />
         <activity
