@@ -14,6 +14,8 @@
         android:theme="@style/Theme.MedRecord" >
         <receiver
             android:name = ".appointment.AlarmReceiver" />
+        <receiver
+            android:name = ".medicine.MedicineAlarmReceiver" />
         <activity
             android:name=".records.ImagesActivity"
             android:label="@string/title_activity_images"
